@@ -40,6 +40,7 @@ func postScrape() {
 	router.HandleFunc("/posts", GetPosts).Methods("GET")
 	fmt.Print("Listen to 8000")
 	log.Fatal(http.ListenAndServe(":8000", router))
+
 }
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
