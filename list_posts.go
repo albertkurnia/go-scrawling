@@ -38,6 +38,8 @@ func postScrape() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/posts", GetPosts).Methods("GET")
+	router.HandleFunc("/posts/{postid}", GetPost).Methods("GET")
+
 	fmt.Print("Listen to 8000")
 	log.Fatal(http.ListenAndServe(":8000", router))
 
@@ -45,6 +47,18 @@ func postScrape() {
 
 func GetPosts(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(posts)
+}
+
+func GetPost(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	for _, item := range posts {
+		if item.PostID == params["postid"] {
+			json.NewEncoder(w).Encode(item)
+			return
+		}
+	}
+
+	json.NewEncoder(w).Encode(&Post{})
 }
 
 func main() {
