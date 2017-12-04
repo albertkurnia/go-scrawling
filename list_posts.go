@@ -14,9 +14,9 @@ import (
 )
 
 type Post struct {
-	PostID string `json:"postid, omitempty"`
-	Title  string `json:"title, omitempty"`
-	_link  string `json:"_link, omitempty"`
+	ID    string `json:"id, omitempty"`
+	Title string `json:"title, omitempty"`
+	Link  string `json:"_link, omitempty"`
 }
 
 var posts []Post
@@ -33,12 +33,12 @@ func postScrape() {
 		title := item.Text()
 		linkTag := item.Find("a")
 		link, _ := linkTag.Attr("href")
-		posts = append(posts, Post{PostID: strconv.Itoa(index), Title: title, _link: link})
+		posts = append(posts, Post{ID: strconv.Itoa(index), Title: title, Link: link})
 	})
 
 	router := mux.NewRouter()
 	router.HandleFunc("/posts", GetPosts).Methods("GET")
-	router.HandleFunc("/posts/{postid}", GetPost).Methods("GET")
+	router.HandleFunc("/posts/{id}", GetPost).Methods("GET")
 
 	fmt.Print("Listen to 8000")
 	log.Fatal(http.ListenAndServe(":8000", router))
@@ -52,7 +52,7 @@ func GetPosts(w http.ResponseWriter, r *http.Request) {
 func GetPost(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	for _, item := range posts {
-		if item.PostID == params["postid"] {
+		if item.ID == params["id"] {
 			json.NewEncoder(w).Encode(item)
 			return
 		}
