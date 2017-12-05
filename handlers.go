@@ -2,10 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
 	"net/http"
-	"net/url"
 
 	"github.com/gorilla/mux"
 )
