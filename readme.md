@@ -11,4 +11,7 @@ I learn how to scraw a web and send the data using JSON
 
 4. run `go run main.go`
 
+### Thanks to 
 
+* github.com/robertotambunan
+* www.jonathanmh.com
