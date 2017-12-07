@@ -1,5 +1,5 @@
 # go-scrawling
-I learn how to scraw a web and send the data using JSON
+I learn how to scrap/crawl a web and send the data using JSON
 
 ## Setup Environment
 
