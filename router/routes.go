@@ -1,7 +1,9 @@
-package main
+package router
 
 import (
 	"net/http"
+
+	. "go-scrawling/handlers"
 )
 
 type Route struct {

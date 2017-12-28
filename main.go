@@ -1,15 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/gorilla/mux"
+	//"github.com/gorilla/mux"
 	. "go-scrawling/data"
-	. "go-scrawling/handlers"
+	. "go-scrawling/router"
+	//. "go-scrawling/handlers"
 )
 
 func main() {
@@ -29,12 +29,7 @@ func main() {
 		Posts = append(Posts, Post{ID: strconv.Itoa(index), Title: title, Link: link})
 	})
 
-	router := mux.NewRouter()
-	router.HandleFunc("/posts", GetPosts).Methods("GET")
-	router.HandleFunc("/posts/{id}", GetPost).Methods("GET")
-	router.HandleFunc("/posts/{id}", CreatePost).Methods("POST")
-	router.HandleFunc("/posts/{id}", DeletePost).Methods("DELETE")
+	router := NewRouter()
 
-	fmt.Print("Listen to 8000")
 	log.Fatal(http.ListenAndServe(":8000", router))
 }
